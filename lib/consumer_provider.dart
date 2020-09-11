@@ -8,6 +8,8 @@ class ConsumerProviderExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Center(child: CircularProgressIndicator(),),
+        Text("The spinner just highlights when there is jank"),
         Expanded(child: Container(color: Colors.green[300], child: ChangeNotifierProvider(
           create: (_) => CounterModel(),
           child: ConsumerExample(),
@@ -47,6 +49,14 @@ class ConsumerExample extends StatelessWidget {
           child: Container(color: Colors.red[300], child: Text("NotListeningModel says: 'count is: ${notListeningModel.count}'"),),
         ),
 
+        Expanded(
+          child: PrintingText("The following widget is expensive"),
+        ),
+
+        Expanded(
+          child: DeeplyNestedWidget(totalDepth: 1000,),
+        ),
+
       ],
     );
   }
@@ -72,6 +82,16 @@ class ProviderOfExample extends StatelessWidget {
         Expanded(
           child: Text("Listening Model says: 'count is: ${model.count}'"),
         ),
+
+        Expanded(
+          child: PrintingText("The following widget is expensive"),
+        ),
+
+        Expanded(
+          child: DeeplyNestedWidget(totalDepth: 1000,),
+        ),
+
+
 
       ],
     );
