@@ -19,43 +19,33 @@ class InheritedWidgetBody extends StatelessWidget {
   Widget build(BuildContext context) {
     print('build() called for InheritedWidgetBody');
 
-    return Consumer<CounterModel>(
-      builder: (context, model, child) {
-        print('builder called for Consumer<CounterModel>');
-        return Column(
-          children: [
-            Expanded(
-              child: RaisedButton(
-                child: PrintingText("CounterModel.increment"),
-                onPressed: model.increment,
+    final model = Provider.of<CounterModel>(context);
+
+    return Column(
+      children: [
+        Expanded(
+          child: RaisedButton(
+            child: PrintingText("CounterModel.increment"),
+            onPressed: model.increment,
+          ),
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: PrintingText(
+                    "The child is built in a built from the model class. When the model changes, it will update. However, the entire tree is rebuilt"),
               ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: PrintingText(
-                        "The first child is passed in through the child parameter. The second child is built from the model value provided in the builder."),
-                  ),
-                  Expanded(
-                    child: child,
-                  ),
-                  Expanded(
-                    child: PrintOnRebuildStatelessWidget(
-                      isConst: false,
-                      index: model.count,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        );
-      },
-      child: const PrintOnRebuildStatelessWidget(
-        index: 1,
-        isConst: true,
-      ),
+              Expanded(
+                child: PrintOnRebuildStatelessWidget(
+                  isConst: false,
+                  index: model.count,
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

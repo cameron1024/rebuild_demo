@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 // print toggles
-const text = true;
+const text = false;
 const deeplyNested = true;
 const inheritedWidget = true;
 const stateless = true;

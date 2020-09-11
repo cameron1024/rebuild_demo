@@ -68,6 +68,15 @@ class _StatelessWidgetExampleState extends State<StatelessWidgetExample> {
           ),
         ),
 
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(child: PrintingText("This stateless widget has no arguments")),
+              Expanded(child: NoArgStatelessWidget()),
+            ],
+          ),
+        ),
+
 
       ],
     );
@@ -109,5 +118,19 @@ class PrintingText extends Text {
   }
 
 }
+
+class NoArgStatelessWidget extends StatelessWidget {
+
+  const NoArgStatelessWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    print('build() called for NoArgStatelessWidget');
+    return PrintingText('NoArgStatelessWidget');
+  }
+}
+
+
+
 
 
